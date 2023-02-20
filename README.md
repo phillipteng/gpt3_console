@@ -1,4 +1,4 @@
-# GPT3_Console_Rust
+# GPT3 Console App
 A simple console application that performs API calls to OpenAI models (including GPT-3) and displays the output. The program is written with rust lang.
 
 ## Installation
