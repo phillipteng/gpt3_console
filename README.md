@@ -14,12 +14,24 @@ reqwest = { version = "0.11", features = ["blocking", "json"] }
 serde = { version = "1.0", features = ["derive"] }
 ```
 
-To build:
+
+## User Manual
+
+### Setup your API Key
+Get your API Key here:
+https://platform.openai.com/account/api-keys
+
+Then add the key to your .bashrc or .zshrc file:
+```
+export OPENAI_API_KEY='YOUR_KEY_HERE'
+```
+* for more information follow instructions here: https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
+
+To run the program:
 $ cargo run 
 To build for release:
 $ cargo build --release
 
-## User Manual
 The program will prompt what you want to ask or request the GPT-3 Model. After a couple seconds, the output along with the time elapsed will print into the console.
 
 ### Additional Settings examples
