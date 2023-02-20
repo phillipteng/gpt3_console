@@ -6,7 +6,9 @@ Prerequisites:
 Install rust and cargo.
 
 Run the following shell commands:
+```
 $ cargo init
+```
 
 Then inside the created Cargo.toml file, append the following after `[dependencies]`:
 ```
@@ -28,11 +30,14 @@ export OPENAI_API_KEY='YOUR_KEY_HERE'
 * for more information follow instructions here: https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
 
 To run the program:
+```
 $ cargo run 
-
+```
 
 To build for release:
+```
 $ cargo build --release
+```
 
 The program will prompt what you want to ask or request the GPT-3 Model. After a couple seconds, the output along with the time elapsed will print into the console.
 
