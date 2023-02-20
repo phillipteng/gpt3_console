@@ -3,8 +3,7 @@ use std::io::{self, BufRead};
 use std::env;
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION, CONTENT_TYPE};
 use serde::{Deserialize, Serialize};
-//
-// -d '{"model": "text-davinci-003", "prompt": "Say this is a test", "temperature": 0, "max_tokens": 7}'
+
 #[derive(Serialize)]
 struct GPT3Request {
     model: String,
@@ -54,7 +53,7 @@ fn main() {
         let request = GPT3Request {
             model: "text-davinci-003".to_string(),
             prompt: input.to_string(),
-            max_tokens: 100,
+            max_tokens: 4000,
             temperature: 0.0,
         };
         input.clear();
