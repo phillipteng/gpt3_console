@@ -29,6 +29,8 @@ export OPENAI_API_KEY='YOUR_KEY_HERE'
 
 To run the program:
 $ cargo run 
+
+
 To build for release:
 $ cargo build --release
 
