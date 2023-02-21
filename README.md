@@ -56,6 +56,4 @@ echo "alias chat='PATH_TO_FOLDER/gpt3_console/target/release/gpt3_console'" >> ~
 	alt='Example of application being run in console'
 	src='demo.gif'
 	/>
-
-<video src="demo.mp4" controls="controls" style="max-width: 730px;">
-</video>
+![image](https://user-images.githubusercontent.com/15207343/220244855-8707c435-dcad-4599-a257-14fca1dde2bb.jpeg)
