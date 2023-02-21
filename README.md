@@ -48,7 +48,7 @@ https://platform.openai.com/docs/models/overview
 You can also change `max_tokens` that changes the maximum length of the response as denoted in the link above.
 
 ## My use case
-After building the solution with 'cargo build --release' and taking note of where the folder is located, you can use the following command to add to your .zshrc or .bashrc so that 'chat' from your shell will run the app. Replace PATH_TO_FOLDER with the location of your folder. Eg.
+After building the solution with `cargo build --release` and taking note of where the folder is located, you can use the following command to add to your .zshrc or .bashrc so that 'chat' from your shell will run the app. Replace `PATH_TO_FOLDER` with the location of your folder. Eg.
 ```
 echo "alias chat='PATH_TO_FOLDER/gpt3_console/target/release/gpt3_console'" >> ~/.zshrc
 ```
