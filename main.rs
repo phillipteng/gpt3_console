@@ -1,3 +1,4 @@
+use std::time::Duration;
 use std::time::Instant;
 use std::io::{self, BufRead};
 use std::env;
@@ -35,8 +36,11 @@ struct GPT3LogProbs {
 fn main() {
     env::set_var("RUST_BACKTRACE", "1");
 
-    // Set up the HTTP client and headers
-    let http_client = reqwest::blocking::Client::new();
+    // Set up the HTTP client and headers and timeout duration to 60 seonds
+    let http_client = reqwest::blocking::Client::builder()
+        .timeout(Duration::from_secs(60))
+        .build()
+        .unwrap();
     let mut headers = HeaderMap::new();
     let api_key = env::var("OPENAI_API_KEY").expect("OPENAI_API_KEY not set");
     let auth_header_value = HeaderValue::from_str(&format!("Bearer {}", api_key)).unwrap();
@@ -53,7 +57,7 @@ fn main() {
         let request = GPT3Request {
             model: "text-davinci-003".to_string(),
             prompt: input.to_string(),
-            max_tokens: 4000,
+            max_tokens: 2000,
             temperature: 0.0,
         };
         input.clear();

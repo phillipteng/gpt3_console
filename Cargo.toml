@@ -1,5 +1,5 @@
 [package]
-name = "alzapi"
+name = "gpt3_console"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,3 +9,6 @@ edition = "2021"
 reqwest = { version = "0.11", features = ["blocking", "json"] }
 serde = { version = "1.0", features = ["derive"] }
 
+[[bin]]
+name = "gpt3_console"
+path = "main.rs"
