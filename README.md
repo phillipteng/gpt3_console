@@ -52,3 +52,6 @@ After building the solution with `cargo build --release` and taking note of wher
 ```
 echo "alias chat='PATH_TO_FOLDER/gpt3_console/target/release/gpt3_console'" >> ~/.zshrc
 ```
+
+<video src="./demo.mov" controls="controls" style="max-width: 730px;">
+</video>
