@@ -52,5 +52,4 @@ After building the solution with `cargo build --release` and taking note of wher
 ```
 echo "alias chat='PATH_TO_FOLDER/gpt3_console/target/release/gpt3_console'" >> ~/.zshrc
 ```
-![image](https://user-images.githubusercontent.com/15207343/220245197-523ac1e3-ba47-4d68-b0e7-631e251571df.jpeg)
-	alt='Example of application being run in console'
+![image](https://user-images.githubusercontent.com/15207343/220245248-41d9ea7b-63fa-4f77-8649-3bf90848ecc1.jpeg)
