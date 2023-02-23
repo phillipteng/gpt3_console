@@ -1,9 +1,12 @@
-use std::time::Duration;
-use std::time::Instant;
-use std::io::{self, BufRead};
-use std::env;
+use std::io::{stdout, Write};
+use std::thread::{spawn, sleep};
+use std::sync::{Arc, Mutex};
 use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION, CONTENT_TYPE};
 use serde::{Deserialize, Serialize};
+use std::env;
+use std::io::{self, BufRead};
+use std::time::Duration;
+use std::time::Instant;
 
 #[derive(Serialize)]
 struct GPT3Request {
@@ -34,8 +37,6 @@ struct GPT3LogProbs {
 }
 
 fn main() {
-    env::set_var("RUST_BACKTRACE", "1");
-
     // Set up the HTTP client and headers and timeout duration to 60 seonds
     let http_client = reqwest::blocking::Client::builder()
         .timeout(Duration::from_secs(60))
@@ -52,8 +53,6 @@ fn main() {
     loop {
         println!("What do you want to ask?");
         stdin.lock().read_line(&mut input).unwrap();
-        // Create a request to the GPT-3 API
-        // Change the model that you want to use here
         let request = GPT3Request {
             model: "text-davinci-003".to_string(),
             prompt: input.to_string(),
@@ -61,9 +60,38 @@ fn main() {
             temperature: 0.0,
         };
         input.clear();
-        // let response: GPT3Response = http_client.post("https://api.openai.com/v1/engines/davinci-codex/completions")
+        
+        let should_stop = Arc::new(Mutex::new(false));
+
+        // Spawn a new thread to print the animation
+        let handle = spawn({
+            let should_stop = should_stop.clone();
+            move || {
+                // Define the animation sequence as a string
+                let animation = "|/-\\";
+
+                // Loop through the animation sequence until the stop flag is set
+                loop {
+                    // Check the stop flag and exit the loop if it's set
+                    if *should_stop.lock().unwrap() {
+                        break;
+                    }
+
+                    // Print the next character in the sequence
+                    for c in animation.chars() {
+                        stdout().flush().unwrap();
+                        print!("{}", c);
+                        stdout().flush().unwrap();
+                        sleep(Duration::from_millis(100));
+                        print!("\r");
+                    }
+                }
+            }
+        });
+
         let start_time = Instant::now();
-        let response: GPT3Response = http_client.post("https://api.openai.com/v1/completions")
+        let response: GPT3Response = http_client
+            .post("https://api.openai.com/v1/completions")
             .headers(headers.clone())
             .json(&request)
             .send()
@@ -71,6 +99,8 @@ fn main() {
             .json()
             .unwrap();
 
+        *should_stop.lock().unwrap() = true;
+        handle.join().unwrap();
         let end_time = Instant::now();
         let duration = end_time - start_time;
         let text = response.choices[0].text.trim();
